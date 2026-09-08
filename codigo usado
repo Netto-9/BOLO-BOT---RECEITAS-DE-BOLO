@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6b35">
+<title>BoloBot 🍰</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+    --bg:#fff8f3;
+    --card:#fff;
+    --text:#211713;
+    --muted:#796b65;
+    --primary:#ff6b35;
+    --primary2:#ff914d;
+    --border:#eadbd2;
+    --soft:#fff0e7;
+    --shadow:0 12px 35px rgba(73,35,20,.10);
+}
+
+body.dark{
+    --bg:#17110f;
+    --card:#241b18;
+    --text:#fff7f2;
+    --muted:#c8b8b0;
+    --border:#493831;
+    --soft:#33241f;
+    --shadow:0 12px 35px rgba(0,0,0,.3);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    transition:.25s;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,248,243,.93);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+}
+
+body.dark header{
+    background:rgba(23,17,15,.93);
+}
+
+.nav{
+    width:min(1180px,calc(100% - 30px));
+    margin:auto;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:1.4rem;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--primary);
+}
+
+.menu{
+    display:flex;
+    gap:6px;
+}
+
+.menu a{
+    padding:9px 12px;
+    border-radius:10px;
+    color:var(--muted);
+    font-weight:bold;
+}
+
+.menu a:hover{
+    background:var(--soft);
+    color:var(--primary);
+}
+
+.theme{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    width:42px;
+    height:42px;
+    border-radius:12px;
+}
+
+/* HERO */
+
+.hero{
+    padding:80px 0;
+    background:
+    radial-gradient(circle at 10% 20%,#ffd6bf 0,transparent 30%),
+    radial-gradient(circle at 90% 20%,#ffe6ae 0,transparent 30%);
+}
+
+.container{
+    width:min(1180px,calc(100% - 30px));
+    margin:auto;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:55px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:50px;
+    background:var(--soft);
+    color:var(--primary);
+    font-size:.82rem;
+    font-weight:900;
+}
+
+.hero h1{
+    margin:20px 0;
+    font-size:clamp(2.8rem,7vw,5.5rem);
+    line-height:.96;
+    letter-spacing:-5px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:650px;
+    font-size:1.08rem;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+
+.btn{
+    border:0;
+    padding:13px 19px;
+    border-radius:13px;
+    font-weight:900;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.primary{
+    background:var(--primary);
+    color:white;
+}
+
+.secondary{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.hero-card{
+    min-height:380px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--border);
+    border-radius:35px;
+    background:linear-gradient(145deg,#fff,#ffe0d1);
+    box-shadow:var(--shadow);
+}
+
+.big-cake{
+    font-size:10rem;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    50%{transform:translateY(-15px)}
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    gap:35px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.stat strong{
+    display:block;
+    font-size:1.5rem;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:.85rem;
+}
+
+/* SECTION */
+
+section{
+    padding:70px 0;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.section-head h2{
+    font-size:2rem;
+}
+
+.section-head p{
+    color:var(--muted);
+}
+
+.search{
+    width:min(380px,100%);
+    padding:14px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    outline:none;
+    background:var(--card);
+    color:var(--text);
+}
+
+.search:focus{
+    border-color:var(--primary);
+}
+
+/* RECIPES */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card-img{
+    height:155px;
+    display:grid;
+    place-items:center;
+    font-size:5.2rem;
+    background:linear-gradient(135deg,#ffe0d0,#fff0c7);
+}
+
+.card-body{
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+.tag{
+    align-self:flex-start;
+    padding:5px 9px;
+    border-radius:30px;
+    background:var(--soft);
+    color:var(--primary);
+    font-size:.72rem;
+    font-weight:bold;
+}
+
+.card h3{
+    margin-top:9px;
+    font-size:1.2rem;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:.9rem;
+    margin-top:6px;
+}
+
+.meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:auto;
+    padding-top:15px;
+}
+
+.meta span{
+    background:var(--soft);
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:.72rem;
+    color:var(--muted);
+    font-weight:bold;
+}
+
+.card-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.card-buttons button{
+    flex:1;
+}
+
+.delete{
+    background:transparent;
+    color:var(--primary);
+    border:1px solid var(--border);
+}
+
+/* AI */
+
+.ai-box{
+    padding:38px;
+    border-radius:30px;
+    color:white;
+    background:linear-gradient(135deg,#251915,#553026);
+    box-shadow:var(--shadow);
+}
+
+.ai-box h2{
+    margin-top:15px;
+    font-size:2rem;
+}
+
+.ai-box p{
+    color:#e6d5ce;
+    margin-top:7px;
+}
+
+.ai-form{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    margin-top:22px;
+}
+
+.input{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    outline:none;
+    background:var(--card);
+    color:var(--text);
+}
+
+textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.feature{
+    padding:25px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+.feature-icon{
+    font-size:2rem;
+}
+
+.feature h3{
+    margin-top:10px;
+}
+
+.feature p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* FORM */
+
+.form{
+    max-width:850px;
+    margin:auto;
+    padding:28px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    font-weight:bold;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.65);
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-content{
+    position:relative;
+    width:min(720px,100%);
+    max-height:90vh;
+    overflow:auto;
+    padding:28px;
+    border-radius:25px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.close{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:var(--soft);
+    color:var(--text);
+    font-size:1.4rem;
+}
+
+.modal-emoji{
+    text-align:center;
+    padding:25px;
+    background:var(--soft);
+    border-radius:20px;
+    font-size:5rem;
+    margin-bottom:20px;
+}
+
+.modal-content h2{
+    margin-right:50px;
+}
+
+.modal-content h4{
+    margin-top:22px;
+    margin-bottom:8px;
+}
+
+.modal-content ul,
+.modal-content ol{
+    padding-left:24px;
+}
+
+/* LOADING */
+
+.loading{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    display:none;
+    place-items:center;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(6px);
+}
+
+.loading.active{
+    display:grid;
+}
+
+.loading-box{
+    padding:25px;
+    border-radius:20px;
+    background:var(--card);
+    color:var(--text);
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+    margin:auto auto 12px;
+    border:4px solid var(--border);
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:300;
+    max-width:350px;
+    display:none;
+    padding:14px 18px;
+    border-radius:14px;
+    background:#211713;
+    color:white;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:35px 0;
+    color:var(--muted);
+}
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:950px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .container,
+    .nav{
+        width:calc(100% - 22px);
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .hero{
+        padding:50px 0;
+    }
+
+    .hero h1{
+        font-size:clamp(2.7rem,14vw,4rem);
+        letter-spacing:-3px;
+    }
+
+    .hero-card{
+        min-height:230px;
+    }
+
+    .big-cake{
+        font-size:6.5rem;
+    }
+
+    section{
+        padding:50px 0;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head .search{
+        width:100%;
+        margin-top:15px;
+    }
+
+    .grid,
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .ai-form{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .modal{
+        align-items:flex-end;
+        padding:0;
+    }
+
+    .modal-content{
+        max-height:92vh;
+        border-radius:25px 25px 0 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+
+        <a href="#inicio" class="logo">
+            🍰 <span>BoloBot</span>
+        </a>
+
+        <nav class="menu">
+            <a href="#catalogo">Receitas</a>
+            <a href="#gerar">BoloBot IA</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#adicionar">Adicionar</a>
+        </nav>
+
+        <button class="theme" id="theme">
+            🌙
+        </button>
+
+    </div>
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="inicio">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <span class="badge">
+                🤖 ASSISTENTE DE RECEITAS
+            </span>
+
+            <h1>
+                Seu bolo perfeito começa no
+                <span>BoloBot.</span>
+            </h1>
+
+            <p>
+                Descubra receitas deliciosas, encontre seu bolo
+                favorito e crie novas combinações de sabores.
+            </p>
+
+            <div class="buttons">
+
+                <a
+                    href="#catalogo"
+                    class="btn primary"
+                >
+                    🍰 Ver receitas
+                </a>
+
+                <a
+                    href="#gerar"
+                    class="btn secondary"
+                >
+                    ✨ Criar receita
+                </a>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <strong id="count">33</strong>
+                    <span>receitas</span>
+                </div>
+
+                <div class="stat">
+                    <strong>📱</strong>
+                    <span>mobile</span>
+                </div>
+
+                <div class="stat">
+                    <strong>💾</strong>
+                    <span>salvamento</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-card">
+            <div class="big-cake">🍰</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATÁLOGO -->
+
+<section id="catalogo">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <h2>🍰 Catálogo de bolos</h2>
+                <p>
+                    Pesquise pelo nome ou sabor.
+                </p>
+            </div>
+
+            <input
+                id="search"
+                class="search"
+                type="search"
+                placeholder="🔎 Buscar bolo..."
+            >
+
+        </div>
+
+        <div
+            id="grid"
+            class="grid"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- GERADOR -->
+
+<section id="gerar">
+
+    <div class="container">
+
+        <div class="ai-box">
+
+            <span class="badge">
+                ✨ BOLOBOT
+            </span>
+
+            <h2>
+                Crie uma receita
+            </h2>
+
+            <p>
+                Digite um sabor e o BoloBot vai criar uma receita
+                personalizada para você.
+            </p>
+
+            <form
+                id="aiForm"
+                class="ai-form"
+            >
+
+                <input
+                    id="flavor"
+                    class="input"
+                    required
+                    maxlength="80"
+                    placeholder="Ex.: chocolate com morango"
+                >
+
+                <button
+                    class="btn primary"
+                    type="submit"
+                >
+                    🤖 Gerar receita
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SOBRE -->
+
+<section id="sobre">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <h2>Por que BoloBot?</h2>
+                <p>
+                    Uma experiência simples para quem ama fazer bolos.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">🔎</div>
+                <h3>Busca rápida</h3>
+                <p>
+                    Encontre rapidamente o bolo que você deseja preparar.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Feito para celular</h3>
+                <p>
+                    Interface adaptada para smartphones, tablets e computadores.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">💾</div>
+                <h3>Suas receitas</h3>
+                <p>
+                    Receitas criadas por você ficam salvas no navegador.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ADICIONAR -->
+
+<section id="adicionar">
+
+    <div class="container">
+
+        <div class="form">
+
+            <div class="section-head">
+
+                <div>
+                    <h2>➕ Adicionar receita</h2>
+                    <p>
+                        Cadastre sua própria receita.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="addForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label>Nome do bolo</label>
+
+                        <input
+                            id="name"
+                            class="input"
+                            required
+                            placeholder="Bolo de Morango"
+                        >
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>Categoria</label>
+
+                        <input
+                            id="category"
+                            class="input"
+                            placeholder="Frutas"
+                        >
+
+                    </div>
+
+                    <div class="field full">
+
+                        <label>Descrição</label>
+
+                        <textarea
+                            id="description"
+                            class="input"
+                            required
+                            placeholder="Uma deliciosa receita..."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="field full">
+
+                        <label>Ingredientes</label>
+
+                        <textarea
+                            id="ingredients"
+                            class="input"
+                            required
+                            placeholder="2 xícaras de farinha&#10;1 xícara de açúcar&#10;3 ovos"
+                        ></textarea>
+
+                    </div>
+
+                    <div class="field full">
+
+                        <label>Modo de preparo</label>
+
+                        <textarea
+                            id="steps"
+                            class="input"
+                            required
+                            placeholder="Misture os ingredientes...&#10;Leve ao forno..."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>Tempo</label>
+
+                        <input
+                            id="time"
+                            class="input"
+                            placeholder="45 minutos"
+                        >
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>Dificuldade</label>
+
+                        <select
+                            id="difficulty"
+                            class="input"
+                        >
+                            <option>Fácil</option>
+                            <option>Média</option>
+                            <option>Difícil</option>
+                        </select>
+
+                    </div>
+
+                    <div class="field full">
+
+                        <button
+                            class="btn primary"
+                            type="submit"
+                        >
+                            💾 Salvar receita
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="container footer">
+
+        <span>
+            🍰 <strong>BoloBot</strong> — receitas para deixar o dia mais doce.
+        </span>
+
+        <span>
+            HTML + CSS + JavaScript
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div
+    id="modal"
+    class="modal"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="close"
+            class="close"
+        >
+            ×
+        </button>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+
+<!-- LOADING -->
+
+<div
+    id="loading"
+    class="loading"
+>
+
+    <div class="loading-box">
+
+        <div class="spinner"></div>
+
+        <strong>
+            O BoloBot está preparando sua receita...
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+"use strict";
+
+/* =========================================
+   DADOS
+========================================= */
+
+const recipes = [
+
+{
+name:"Bolo de Abacaxi",
+category:"Frutas",
+flavor:"abacaxi",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo fofinho com sabor tropical de abacaxi.",
+ingredients:["2 xícaras de farinha de trigo","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 xícara de abacaxi picado","1 colher de sopa de fermento"],
+steps:["Preaqueça o forno a 180 °C.","Bata os ovos com o açúcar e o óleo.","Adicione o leite e o abacaxi.","Acrescente a farinha aos poucos.","Misture o fermento delicadamente.","Coloque em uma forma untada.","Asse por aproximadamente 40 minutos."]
+},
+
+{
+name:"Bolo de Banana",
+category:"Frutas",
+flavor:"banana",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo macio de banana com um toque de canela.",
+ingredients:["3 bananas maduras","2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1/2 xícara de leite","1 colher de chá de canela","1 colher de sopa de fermento"],
+steps:["Amasse as bananas.","Misture os ovos, açúcar e óleo.","Adicione as bananas e o leite.","Junte a farinha e a canela.","Misture o fermento.","Coloque em forma untada.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Café",
+category:"Café",
+flavor:"café",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo aromático com delicioso sabor de café.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de café forte morno","1 colher de sopa de fermento"],
+steps:["Misture os ovos, açúcar e óleo.","Adicione o café morno.","Acrescente a farinha.","Misture o fermento.","Despeje em forma untada.","Asse a 180 °C por cerca de 40 minutos."]
+},
+
+{
+name:"Bolo de Cenoura",
+category:"Clássicos",
+flavor:"cenoura",
+time:"45 min",
+difficulty:"Fácil",
+description:"Clássico bolo brasileiro de cenoura com cobertura de chocolate.",
+ingredients:["3 cenouras médias","3 ovos","1 xícara de óleo","2 xícaras de açúcar","2 e 1/2 xícaras de farinha","1 colher de sopa de fermento"],
+steps:["Bata a cenoura, ovos e óleo no liquidificador.","Misture com o açúcar e a farinha.","Adicione o fermento.","Coloque em forma untada.","Asse a 180 °C por 40 minutos.","Cubra com chocolate derretido."]
+},
+
+{
+name:"Bolo de Chocolate",
+category:"Chocolate",
+flavor:"chocolate",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo de chocolate fofinho, intenso e muito saboroso.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","1 xícara de chocolate em pó","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 colher de sopa de fermento"],
+steps:["Misture os ovos, açúcar e óleo.","Adicione o leite.","Junte farinha e chocolate.","Misture o fermento.","Coloque em forma untada.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Coco",
+category:"Clássicos",
+flavor:"coco",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo macio com sabor marcante de coco.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite de coco","1 xícara de coco ralado","1 colher de sopa de fermento"],
+steps:["Bata ovos, açúcar e óleo.","Adicione o leite de coco.","Acrescente farinha e coco.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Doce de Leite",
+category:"Doces",
+flavor:"doce de leite",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo macio recheado com delicioso doce de leite.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de manteiga","1 xícara de leite","400 g de doce de leite","1 colher de sopa de fermento"],
+steps:["Prepare a massa misturando ovos, açúcar e manteiga.","Adicione leite e farinha.","Misture o fermento.","Asse por 40 minutos.","Depois de frio, corte e recheie com doce de leite."]
+},
+
+{
+name:"Bolo de Especiarias",
+category:"Especiarias",
+flavor:"especiarias",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo aromático com canela, cravo e noz-moscada.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 colher de chá de canela","1 pitada de cravo e noz-moscada","1 colher de sopa de fermento"],
+steps:["Misture os ovos, açúcar e óleo.","Adicione leite e especiarias.","Acrescente a farinha.","Finalize com fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Fubá",
+category:"Clássicos",
+flavor:"fubá",
+time:"45 min",
+difficulty:"Fácil",
+description:"Tradicional bolo de fubá brasileiro.",
+ingredients:["2 xícaras de fubá","1 xícara de farinha","1 e 1/2 xícara de açúcar","3 ovos","1 xícara de leite","1/2 xícara de óleo","1 colher de sopa de fermento"],
+steps:["Misture os ingredientes líquidos.","Acrescente açúcar, fubá e farinha.","Misture o fermento.","Coloque em forma untada.","Asse a 180 °C por aproximadamente 40 minutos."]
+},
+
+{
+name:"Bolo de Gengibre",
+category:"Especiarias",
+flavor:"gengibre",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo aromático de gengibre com sabor levemente picante.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar mascavo","3 ovos","1/2 xícara de óleo","1 xícara de leite","2 colheres de sopa de gengibre ralado","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite e gengibre.","Acrescente a farinha.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Hortelã com Chocolate",
+category:"Chocolate",
+flavor:"hortelã com chocolate",
+time:"50 min",
+difficulty:"Média",
+description:"Combinação refrescante de hortelã e chocolate.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","2 colheres de sopa de chocolate em pó","1 colher de chá de essência de hortelã","1 colher de sopa de fermento"],
+steps:["Bata ovos, açúcar e óleo.","Adicione leite e hortelã.","Acrescente farinha e chocolate.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Iogurte",
+category:"Clássicos",
+flavor:"iogurte",
+time:"40 min",
+difficulty:"Fácil",
+description:"Bolo simples, leve e extremamente fofinho.",
+ingredients:["1 pote de iogurte natural","2 xícaras de farinha","1 e 1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 colher de sopa de fermento"],
+steps:["Bata ovos, açúcar, óleo e iogurte.","Acrescente a farinha.","Misture o fermento.","Coloque em forma untada.","Asse por aproximadamente 35 minutos."]
+},
+
+{
+name:"Bolo de Jaca",
+category:"Frutas",
+flavor:"jaca",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo tropical com sabor especial de jaca.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 xícara de polpa de jaca","1 colher de sopa de fermento"],
+steps:["Bata os ovos com açúcar e óleo.","Adicione leite e jaca.","Misture farinha.","Finalize com fermento.","Asse a 180 °C por 45 minutos."]
+},
+
+{
+name:"Kuchen de Maçã",
+category:"Alemão",
+flavor:"maçã",
+time:"60 min",
+difficulty:"Média",
+description:"Clássico bolo alemão de maçã com cobertura crocante.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","100 g de manteiga","1/2 xícara de leite","3 maçãs fatiadas","1 colher de chá de canela","1 colher de sopa de fermento"],
+steps:["Bata manteiga, açúcar e ovos.","Adicione farinha e leite.","Misture o fermento.","Coloque metade da massa na forma.","Distribua as maçãs e cubra com o restante.","Asse a 180 °C por 45 minutos."]
+},
+
+{
+name:"Bolo de Limão",
+category:"Cítricos",
+flavor:"limão",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo cítrico com sabor refrescante de limão.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","Suco de 2 limões","Raspas de limão","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite e suco de limão.","Acrescente farinha e raspas.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Laranja",
+category:"Cítricos",
+flavor:"laranja",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo fofinho e perfumado de laranja.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de suco de laranja","Raspas de laranja","1 colher de sopa de fermento"],
+steps:["Bata ovos, açúcar e óleo.","Adicione suco e raspas.","Acrescente farinha.","Misture o fermento.","Asse por aproximadamente 40 minutos."]
+},
+
+{
+name:"Bolo de Maçã",
+category:"Frutas",
+flavor:"maçã",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo úmido de maçã com toque de canela.",
+ingredients:["3 maçãs","2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 colher de chá de canela","1 colher de sopa de fermento"],
+steps:["Pique as maçãs.","Misture ovos, açúcar e óleo.","Adicione farinha e canela.","Acrescente as maçãs.","Misture o fermento.","Asse a 180 °C por 45 minutos."]
+},
+
+{
+name:"Bolo de Mel",
+category:"Doces",
+flavor:"mel",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo macio e aromático adoçado com mel.",
+ingredients:["2 xícaras de farinha","1/2 xícara de mel","1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 colher de sopa de fermento"],
+steps:["Misture ovos, mel, açúcar e óleo.","Adicione leite.","Acrescente farinha.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo de Milho",
+category:"Clássicos",
+flavor:"milho",
+time:"50 min",
+difficulty:"Fácil",
+description:"Bolo cremoso e saboroso de milho.",
+ingredients:["2 latas de milho","1 xícara de leite","3 ovos","1 xícara de açúcar","1/2 xícara de óleo","1 xícara de fubá","1 colher de sopa de fermento"],
+steps:["Bata milho, leite, ovos e óleo.","Adicione açúcar e fubá.","Misture o fermento.","Coloque em forma untada.","Asse por 45 minutos."]
+},
+
+{
+name:"Bolo de Nozes",
+category:"Frutas secas",
+flavor:"nozes",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo rico e aromático com pedaços de nozes.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","100 g de manteiga","1 xícara de leite","1 xícara de nozes picadas","1 colher de sopa de fermento"],
+steps:["Bata manteiga, açúcar e ovos.","Adicione leite e farinha.","Junte as nozes.","Misture o fermento.","Asse a 180 °C por 45 minutos."]
+},
+
+{
+name:"Bolo de Ovomaltine",
+category:"Chocolate",
+flavor:"ovomaltine",
+time:"50 min",
+difficulty:"Média",
+description:"Bolo de chocolate com delicioso sabor de Ovomaltine.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","1 xícara de Ovomaltine","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite.","Junte farinha e Ovomaltine.","Misture o fermento.","Asse por 40 minutos."]
+},
+
+{
+name:"Bolo de Paçoca",
+category:"Doces",
+flavor:"paçoca",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo cremoso com sabor marcante de paçoca.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","6 paçocas esfareladas","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite.","Junte farinha e paçoca.","Misture o fermento.","Asse a 180 °C por 45 minutos."]
+},
+
+{
+name:"Bolo Pão de Ló",
+category:"Clássicos",
+flavor:"pão de ló",
+time:"40 min",
+difficulty:"Média",
+description:"Massa leve e aerada perfeita para recheios.",
+ingredients:["6 ovos","2 xícaras de açúcar","2 xícaras de farinha","1 colher de chá de essência de baunilha","1 colher de sopa de fermento"],
+steps:["Bata os ovos com açúcar até dobrar de volume.","Acrescente farinha delicadamente.","Adicione baunilha e fermento.","Asse a 180 °C por 35 minutos."]
+},
+
+{
+name:"Bolo de Queijo",
+category:"Clássicos",
+flavor:"queijo",
+time:"50 min",
+difficulty:"Média",
+description:"Bolo delicado com sabor de queijo.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 xícara de queijo ralado","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite e queijo.","Acrescente farinha.","Misture o fermento.","Asse por 40 minutos."]
+},
+
+{
+name:"Bolo Red Velvet",
+category:"Clássicos",
+flavor:"red velvet",
+time:"70 min",
+difficulty:"Difícil",
+description:"Bolo vermelho aveludado com cobertura cremosa.",
+ingredients:["2 e 1/2 xícaras de farinha","1 e 1/2 xícara de açúcar","2 ovos","1 xícara de leite","1/2 xícara de óleo","2 colheres de chocolate em pó","Corante vermelho","1 colher de sopa de fermento"],
+steps:["Misture os ingredientes líquidos.","Adicione farinha e chocolate.","Acrescente o corante.","Misture o fermento.","Asse a 180 °C por 40 minutos.","Depois de frio, recheie com cream cheese."]
+},
+
+{
+name:"Bolo Sonho de Valsa",
+category:"Chocolate",
+flavor:"sonho de valsa",
+time:"65 min",
+difficulty:"Difícil",
+description:"Bolo inspirado no famoso bombom de chocolate e amendoim.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","6 bombons Sonho de Valsa","1 colher de sopa de fermento"],
+steps:["Prepare a massa de chocolate.","Acrescente pedaços dos bombons.","Misture o fermento.","Asse por 45 minutos.","Cubra com chocolate e bombons picados."]
+},
+
+{
+name:"Bolo de Tangerina",
+category:"Cítricos",
+flavor:"tangerina",
+time:"45 min",
+difficulty:"Fácil",
+description:"Bolo cítrico e aromático de tangerina.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de suco de tangerina","Raspas de tangerina","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione o suco.","Acrescente farinha e raspas.","Misture o fermento.","Asse por 40 minutos."]
+},
+
+{
+name:"Bolo de Uva",
+category:"Frutas",
+flavor:"uva",
+time:"50 min",
+difficulty:"Média",
+description:"Bolo delicado preparado com uvas frescas.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 xícara de uvas sem sementes","1 colher de sopa de fermento"],
+steps:["Misture ovos, açúcar e óleo.","Adicione leite e farinha.","Acrescente as uvas.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo Vulcão de Chocolate",
+category:"Chocolate",
+flavor:"chocolate",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo com cobertura abundante de chocolate escorrendo.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","1 xícara de chocolate em pó","3 ovos","1/2 xícara de óleo","1 xícara de leite","1 colher de sopa de fermento","1 lata de leite condensado","1 caixa de creme de leite"],
+steps:["Prepare a massa de chocolate.","Asse por 40 minutos.","Prepare um brigadeiro cremoso.","Coloque o bolo em um prato.","Cubra com o brigadeiro até escorrer pelas laterais."]
+},
+
+{
+name:"Waffle Cake",
+category:"Especiais",
+flavor:"waffle",
+time:"40 min",
+difficulty:"Média",
+description:"Camadas de waffles macios com creme.",
+ingredients:["2 xícaras de farinha","2 ovos","1 e 1/2 xícara de leite","1/2 xícara de manteiga derretida","2 colheres de açúcar","1 colher de sopa de fermento","Creme para rechear"],
+steps:["Misture os ingredientes da massa.","Prepare os waffles em uma máquina própria.","Deixe esfriar.","Monte camadas alternando waffle e creme.","Finalize com frutas ou chocolate."]
+},
+
+{
+name:"Bolo Xadrez",
+category:"Especiais",
+flavor:"xadrez",
+time:"80 min",
+difficulty:"Difícil",
+description:"Bolo visualmente marcante com massa de chocolate e baunilha.",
+ingredients:["4 xícaras de farinha","2 xícaras de açúcar","6 ovos","1 xícara de leite","1 xícara de manteiga","4 colheres de chocolate em pó","2 colheres de fermento"],
+steps:["Prepare uma massa de baunilha.","Divida a massa em duas partes.","Adicione chocolate em uma parte.","Asse as massas separadamente.","Corte e monte os quadrados alternando sabores.","Cubra com chocolate."]
+},
+
+{
+name:"Bolo de Yuzu",
+category:"Cítricos",
+flavor:"yuzu",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo cítrico inspirado no aroma delicado do yuzu.",
+ingredients:["2 xícaras de farinha","1 xícara de açúcar","3 ovos","1/2 xícara de manteiga","1/2 xícara de leite","Suco e raspas de yuzu","1 colher de sopa de fermento"],
+steps:["Bata manteiga, açúcar e ovos.","Adicione leite e yuzu.","Acrescente farinha.","Misture o fermento.","Asse a 180 °C por 40 minutos."]
+},
+
+{
+name:"Bolo Zebra",
+category:"Especiais",
+flavor:"zebra",
+time:"55 min",
+difficulty:"Média",
+description:"Bolo mesclado de chocolate e baunilha com visual de zebra.",
+ingredients:["2 xícaras de farinha","1 e 1/2 xícara de açúcar","3 ovos","1/2 xícara de óleo","1 xícara de leite","3 colheres de chocolate em pó","1 colher de sopa de fermento"],
+steps:["Prepare a massa básica.","Divida em duas partes.","Adicione chocolate em uma delas.","Coloque as massas alternadamente na forma.","Asse a 180 °C por 45 minutos."]
+}
+
+];
+
+
+/* =========================================
+   UTILIDADES
+========================================= */
+
+function normalize(text){
+    return String(text || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase();
+}
+
+function escapeHTML(text){
+    return String(text ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function emoji(flavor){
+
+    const f=normalize(flavor);
+
+    if(f.includes("chocolate")) return "🍫";
+    if(f.includes("banana")) return "🍌";
+    if(f.includes("abacaxi")) return "🍍";
+    if(f.includes("coco")) return "🥥";
+    if(f.includes("uva")) return "🍇";
+    if(f.includes("laranja")) return "🍊";
+    if(f.includes("tangerina")) return "🍊";
+    if(f.includes("limao")) return "🍋";
+    if(f.includes("yuzu")) return "🍋";
+    if(f.includes("maca")) return "🍎";
+    if(f.includes("milho")) return "🌽";
+    if(f.includes("fuba")) return "🌽";
+    if(f.includes("cafe")) return "☕";
+    if(f.includes("mel")) return "🍯";
+    if(f.includes("nozes")) return "🌰";
+
+    return "🍰";
+}
+
+
+/* =========================================
+   RECEITAS PERSONALIZADAS
+========================================= */
+
+let custom=[];
+
+try{
+
+    const saved=JSON.parse(
+        localStorage.getItem("bolobot_custom")
+    );
+
+    if(Array.isArray(saved)){
+        custom=saved;
+    }
+
+}catch(error){
+    custom=[];
+}
+
+
+let all=[...recipes,...custom];
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const grid=document.getElementById("grid");
+const search=document.getElementById("search");
+const modal=document.getElementById("modal");
+const modalBody=document.getElementById("modalBody");
+const loading=document.getElementById("loading");
+const toast=document.getElementById("toast");
+const count=document.getElementById("count");
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(message){
+
+    toast.textContent=message;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer=setTimeout(()=>{
+        toast.classList.remove("show");
+    },2800);
+}
+
+
+/* =========================================
+   RENDER
+========================================= */
+
+function render(){
+
+    const q=normalize(search.value);
+
+    const filtered=all.filter(recipe=>{
+
+        const text=normalize(
+            recipe.name+" "+
+            recipe.category+" "+
+            recipe.flavor+" "+
+            recipe.description
+        );
+
+        return !q || text.includes(q);
+    });
+
+    count.textContent=all.length;
+
+    if(!filtered.length){
+
+        grid.innerHTML=`
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:50px;
+                background:var(--card);
+                border:1px dashed var(--border);
+                border-radius:20px;
+            ">
+                <div style="font-size:3rem">🔎</div>
+                <strong>Nenhum bolo encontrado.</strong>
+                <p style="color:var(--muted)">
+                    Tente outra pesquisa.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML=filtered.map((r,index)=>`
+
+        <article class="card">
+
+            <div class="card-img">
+                ${emoji(r.flavor)}
+            </div>
+
+            <div class="card-body">
+
+                <span class="tag">
+                    ${escapeHTML(r.category)}
+                </span>
+
+                <h3>
+                    ${escapeHTML(r.name)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(r.description)}
+                </p>
+
+                <div class="meta">
+
+                    <span>⏱ ${escapeHTML(r.time)}</span>
+
+                    <span>⭐ ${escapeHTML(r.difficulty)}</span>
+
+                    <span>🍽 10 porções</span>
+
+                </div>
+
+                <div class="card-buttons">
+
+                    <button
+                        class="btn primary"
+                        onclick="openRecipe(${index}, '${escapeHTML(r.name)}')"
+                    >
+                        Ver receita
+                    </button>
+
+                    ${
+                        r.custom
+                        ? `
+                        <button
+                            class="btn delete"
+                            onclick="deleteCustom('${r.id}')"
+                        >
+                            Excluir
+                        </button>
+                        `
+                        :""
+                    }
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+
+    window.filteredRecipes=filtered;
+}
+
+
+search.addEventListener("input",render);
+
+
+/* =========================================
+   ABRIR RECEITA
+========================================= */
+
+function openRecipe(index,name){
+
+    const recipe=
+        window.filteredRecipes.find(
+            r=>r.name===name
+        );
+
+    if(!recipe){
+        showToast("Receita não encontrada.");
+        return;
+    }
+
+    modalBody.innerHTML=`
+
+        <div class="modal-emoji">
+            ${emoji(recipe.flavor)}
+        </div>
+
+        <h2>
+            ${escapeHTML(recipe.name)}
+        </h2>
+
+        <p style="color:var(--muted);margin-top:7px">
+            ${escapeHTML(recipe.description)}
+        </p>
+
+        <div class="meta">
+            <span>⏱ ${escapeHTML(recipe.time)}</span>
+            <span>⭐ ${escapeHTML(recipe.difficulty)}</span>
+            <span>🍽 10 porções</span>
+        </div>
+
+        <h4>🥣 Ingredientes</h4>
+
+        <ul>
+            ${recipe.ingredients.map(i=>`
+                <li>${escapeHTML(i)}</li>
+            `).join("")}
+        </ul>
+
+        <h4>👨‍🍳 Modo de preparo</h4>
+
+        <ol>
+            ${recipe.steps.map(s=>`
+                <li>${escapeHTML(s)}</li>
+            `).join("")}
+        </ol>
+
+    `;
+
+    modal.classList.add("active");
+}
+
+
+/* =========================================
+   FECHAR
+========================================= */
+
+document.getElementById("close").onclick=()=>{
+    modal.classList.remove("active");
+};
+
+modal.onclick=e=>{
+    if(e.target===modal){
+        modal.classList.remove("active");
+    }
+};
+
+document.onkeydown=e=>{
+    if(e.key==="Escape"){
+        modal.classList.remove("active");
+    }
+};
+
+
+/* =========================================
+   GERADOR
+========================================= */
+
+function createRecipe(flavor){
+
+    const name=
+        flavor.charAt(0).toUpperCase()+
+        flavor.slice(1);
+
+    return{
+
+        id:"custom-"+Date.now(),
+
+        name:"Bolo de "+name,
+
+        category:"Criado pelo BoloBot",
+
+        flavor:flavor,
+
+        time:"50 minutos",
+
+        difficulty:"Fácil",
+
+        description:
+            "Receita personalizada de bolo de "+
+            flavor+
+            " criada pelo BoloBot.",
+
+        ingredients:[
+            "2 xícaras de farinha de trigo",
+            "1 xícara de açúcar",
+            "3 ovos",
+            "1/2 xícara de óleo",
+            "1 xícara de leite",
+            "1 xícara de "+flavor,
+            "1 colher de sopa de fermento"
+        ],
+
+        steps:[
+            "Preaqueça o forno a 180 °C.",
+            "Misture os ovos, açúcar e óleo.",
+            "Adicione o leite e o sabor de "+flavor+".",
+            "Acrescente a farinha aos poucos.",
+            "Misture o fermento delicadamente.",
+            "Coloque a massa em uma forma untada.",
+            "Asse por aproximadamente 40 minutos.",
+            "Faça o teste do palito.",
+            "Deixe esfriar antes de servir."
+        ],
+
+        custom:true
+
+    };
+}
+
+
+document
+.getElementById("aiForm")
+.addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    const input=document.getElementById("flavor");
+    const flavor=input.value.trim();
+
+    if(!flavor){
+        showToast("Digite um sabor.");
+        return;
+    }
+
+    loading.classList.add("active");
+
+    setTimeout(()=>{
+
+        try{
+
+            const recipe=createRecipe(flavor);
+
+            custom.unshift(recipe);
+
+            localStorage.setItem(
+                "bolobot_custom",
+                JSON.stringify(custom)
+            );
+
+            all=[...recipes,...custom];
+
+            render();
+
+            input.value="";
+
+            loading.classList.remove("active");
+
+            showToast("✨ Receita criada com sucesso!");
+
+            setTimeout(()=>{
+                openRecipe(0,recipe.name);
+            },200);
+
+        }catch(error){
+
+            loading.classList.remove("active");
+
+            showToast(
+                "Não foi possível criar a receita."
+            );
+        }
+
+    },700);
+
+});
+
+
+/* =========================================
+   ADICIONAR RECEITA
+========================================= */
+
+document
+.getElementById("addForm")
+.addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    try{
+
+        const recipe={
+
+            id:"custom-"+Date.now(),
+
+            name:document
+                .getElementById("name")
+                .value.trim(),
+
+            category:
+                document
+                .getElementById("category")
+                .value.trim() ||
+                "Personalizada",
+
+            flavor:
+                document
+                .getElementById("name")
+                .value.trim(),
+
+            description:
+                document
+                .getElementById("description")
+                .value.trim(),
+
+            ingredients:
+                document
+                .getElementById("ingredients")
+                .value
+                .split("\n")
+                .map(x=>x.trim())
+                .filter(Boolean),
+
+            steps:
+                document
+                .getElementById("steps")
+                .value
+                .split("\n")
+                .map(x=>x.trim())
+                .filter(Boolean),
+
+            time:
+                document
+                .getElementById("time")
+                .value.trim() ||
+                "45 minutos",
+
+            difficulty:
+                document
+                .getElementById("difficulty")
+                .value,
+
+            custom:true
+
+        };
+
+        if(
+            !recipe.name ||
+            !recipe.description ||
+            !recipe.ingredients.length ||
+            !recipe.steps.length
+        ){
+
+            showToast(
+                "Preencha todos os campos obrigatórios."
+            );
+
+            return;
+        }
+
+        custom.unshift(recipe);
+
+        localStorage.setItem(
+            "bolobot_custom",
+            JSON.stringify(custom)
+        );
+
+        all=[...recipes,...custom];
+
+        render();
+
+        e.target.reset();
+
+        showToast(
+            "🍰 Receita adicionada!"
+        );
+
+        document
+        .getElementById("catalogo")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    }catch(error){
+
+        showToast(
+            "Não foi possível salvar a receita."
+        );
+
+    }
+
+});
+
+
+/* =========================================
+   EXCLUIR
+========================================= */
+
+function deleteCustom(id){
+
+    if(!confirm(
+        "Deseja excluir esta receita?"
+    )){
+        return;
+    }
+
+    custom=custom.filter(
+        r=>r.id!==id
+    );
+
+    localStorage.setItem(
+        "bolobot_custom",
+        JSON.stringify(custom)
+    );
+
+    all=[...recipes,...custom];
+
+    render();
+
+    showToast("🗑️ Receita excluída.");
+}
+
+
+/* =========================================
+   TEMA
+========================================= */
+
+const theme=document.getElementById("theme");
+
+try{
+
+    if(
+        localStorage.getItem(
+            "bolobot_theme"
+        )==="dark"
+    ){
+
+        document.body.classList.add("dark");
+
+    }
+
+}catch(error){}
+
+
+function updateThemeIcon(){
+
+    theme.textContent=
+        document.body.classList.contains("dark")
+        ?"☀️"
+        :"🌙";
+}
+
+theme.onclick=()=>{
+
+    document.body.classList.toggle("dark");
+
+    try{
+
+        localStorage.setItem(
+            "bolobot_theme",
+            document.body.classList.contains("dark")
+            ?"dark"
+            :"light"
+        );
+
+    }catch(error){}
+
+    updateThemeIcon();
+};
+
+updateThemeIcon();
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+render();
+
+</script>
+
+</body>
+</html>
